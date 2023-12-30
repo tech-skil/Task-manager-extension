@@ -9,18 +9,19 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <style>
         #data {
-            max-height: 60px;
+            max-height: 80px;
             overflow-y: auto;
         }
     </style>
 </head>
 
-<body>
+<body style="background-color:cadetblue">
     <div class="container p-4" style="
         width: 360px;
         max-height: 580px;
         overflow-y: auto;
         background-color: rgb(251, 251, 250);
+        border: 1px solid black;
     ">
         <nav class="navbar" style="
             background-color: #bbe3fd;
@@ -46,7 +47,7 @@
         </form>
         <div class="container" style="text-align: center">
             <h1>Timer</h1>
-            <p id="time">00 : 00 : 00</p>
+            <p id="time">00 : 00 : 00 .00</p>
             <button id="startButton" class="btn btn-primary my-3 mx-2">
                 Start
             </button>

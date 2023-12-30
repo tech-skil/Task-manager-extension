@@ -1,15 +1,18 @@
-let [seconds, minutes, hours] = [0, 0, 0];
+let [seconds, minutes, hours,milisecond] = [0, 0, 0,0];
 let displayTime = document.getElementById("time");
 let timer = null;
 
 if (localStorage.getItem("timerValues")) {
     const storedValues = JSON.parse(localStorage.getItem("timerValues"));
-    [hours, minutes, seconds] = storedValues;
-    displayTime.innerHTML = formatTime(hours) + " : " + formatTime(minutes) + " : " + formatTime(seconds);
+    [hours, minutes, seconds,milisecond] = storedValues;
+    displayTime.innerHTML = formatTime(hours) + " : " + formatTime(minutes) + " : " + formatTime(seconds)+"."+formatTime(milisecond);
 }
 
 function stopwatch() {
-    seconds++;
+    milisecond++;
+    if (milisecond==100){
+        seconds++;
+        milisecond=0;
     if (seconds == 60) {
         seconds = 0;
         minutes++;
@@ -18,30 +21,34 @@ function stopwatch() {
             hours++;
         }
     }
-    displayTime.innerHTML = formatTime(hours) + " : " + formatTime(minutes) + " : " + formatTime(seconds);
+}
+var hr;
+    displayTime.innerHTML = formatTime(hours) + " : " + formatTime(minutes) + " : " + formatTime(seconds)+"."+formatTime(milisecond);
 }
 
 function start() {
     if (timer !== null) {
         clearInterval(timer);
     }
-    timer = setInterval(stopwatch, 1000);
+    timer = setInterval(stopwatch, 10);
 }
 
 function stop() {
     clearInterval(timer);
-    localStorage.setItem("timerValues", JSON.stringify([hours, minutes, seconds]));
+    localStorage.setItem("timerValues", JSON.stringify([hours, minutes, seconds,milisecond]));
 }
 
 function reset() {
     clearInterval(timer);
-    [seconds, minutes, hours] = [0, 0, 0];
-    displayTime.innerHTML = "00 : 00 : 00";
+    [seconds, minutes, hours,milisecond] = [0, 0, 0,0];
+    displayTime.innerHTML = "00 : 00 : 00.00";
 }
 
 function formatTime(time) {
     return time < 10 ? "0" + time : time;
 }
+
+
 
 function loadTasks() {
     var taskList = document.getElementById("taskList");
